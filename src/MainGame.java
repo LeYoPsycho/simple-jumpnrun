@@ -12,8 +12,9 @@ public class MainGame extends BasicGame
     //Declares
 
     Character firstPlayer;
-    Image backgroundImage;
+    //Image backgroundImage;
     PackedSpriteSheet mainSheet;
+    Color backgroundColor;
 
     //Constructor
     public MainGame(String gamename)
@@ -28,7 +29,8 @@ public class MainGame extends BasicGame
         //Inits
         mainSheet = new PackedSpriteSheet("./res/sprites/sprites_data.def");
         firstPlayer = new Character(mainSheet.getSprite("Mario.gif"), 20, 340);
-        backgroundImage = new Image("./res/sprites/background.png");
+        //backgroundImage = new Image("./res/sprites/background.png");
+        backgroundColor = new Color(92, 148, 252);
 
         gc.getInput().enableKeyRepeat();
     }
@@ -43,7 +45,8 @@ public class MainGame extends BasicGame
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         //Draw Background
-        g.drawImage(backgroundImage, 0, 0);
+        g.setColor(backgroundColor);
+        g.fillRect(0, 0, gc.getScreenWidth(), gc.getScreenHeight());
         g.drawImage(firstPlayer.getCharacterImage(), firstPlayer.getCharacterX(), firstPlayer.getCharacterY());
 
     }
