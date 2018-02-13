@@ -2,17 +2,20 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
+import javax.swing.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainGame extends BasicGame
 {
 
+    //Variables
+    static int _width, _height;
+
 
     //Declares
 
     Character firstPlayer;
-    //Image backgroundImage;
     PackedSpriteSheet mainSheet;
     Color backgroundColor;
 
@@ -28,18 +31,25 @@ public class MainGame extends BasicGame
     public void init(GameContainer gc) throws SlickException {
         //Inits
         mainSheet = new PackedSpriteSheet("./res/sprites/sprites_data.def");
-        firstPlayer = new Character(mainSheet.getSprite("Mario.gif"), 20, 340);
-        //backgroundImage = new Image("./res/sprites/background.png");
+        firstPlayer = new Character(mainSheet.getSprite("mario.png"), 0, _height - mainSheet.getSprite("mario.png").getHeight() -16);
         backgroundColor = new Color(92, 148, 252);
 
         gc.getInput().enableKeyRepeat();
     }
 
 
+
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {
 
-        //if(gc.getInput().isKeyDown(Input.KEY_A))
+        if(gc.getInput().isKeyDown(Input.KEY_D)) {
+            firstPlayer.setCharacterX(firstPlayer.getCharacterX() + 5);
+        }
+
+        if(gc.getInput().isKeyDown(Input.KEY_A)) {
+            firstPlayer.setCharacterX(firstPlayer.getCharacterX() + -5);
+        }
+
     }
 
     @Override
@@ -47,16 +57,26 @@ public class MainGame extends BasicGame
         //Draw Background
         g.setColor(backgroundColor);
         g.fillRect(0, 0, gc.getScreenWidth(), gc.getScreenHeight());
+
+        //Draw Player Sprite
         g.drawImage(firstPlayer.getCharacterImage(), firstPlayer.getCharacterX(), firstPlayer.getCharacterY());
 
+        //Draw Ground Sprites
+        int i=0;
+        while (i<650) {
+            g.drawImage(mainSheet.getSprite("ground_1.png"), i, _height - mainSheet.getSprite("ground_1.png").getHeight());
+            i = i+16;
+        }
     }
 
     public static void main(String[] args) {
         try {
             AppGameContainer appgc;
-            appgc = new AppGameContainer(new ScalableGame(new MainGame("Super Duper Mario Bros"), 1280, 720));
+            _width = 640; //Ganz unsauberer Code an der Stelle, ich weiß
+            _height = 480;
+            appgc = new AppGameContainer(new ScalableGame(new MainGame("Super Duper Mario Bros"), _width, _height));
 
-            appgc.setDisplayMode(appgc.getScreenWidth() / 2, appgc.getScreenHeight() / 2, false);
+            //appgc.setDisplayMode(appgc.getScreenWidth() / 2, appgc.getScreenHeight() / 2, false);
 
 
             appgc.start();

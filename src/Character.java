@@ -19,6 +19,14 @@ public class Character {
 
     }
 
+    //Set Propertys
+    void setCharacterX(float x) {
+        characterX = x;
+    }
+
+    void setCharacterY(float y) {
+        characterY = y;
+    }
 
     //Get Propertys
     Image getCharacterImage() {
