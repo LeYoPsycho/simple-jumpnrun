@@ -2,8 +2,6 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,9 +11,9 @@ public class MainGame extends BasicGame
 
     //Declares
 
-    Character FirstPlayer;
+    Character firstPlayer;
     Image backgroundImage;
-    PackedSpriteSheet MainSheet;
+    PackedSpriteSheet mainSheet;
 
     //Constructor
     public MainGame(String gamename)
@@ -28,8 +26,8 @@ public class MainGame extends BasicGame
     @Override
     public void init(GameContainer gc) throws SlickException {
         //Inits
-        MainSheet = new PackedSpriteSheet("./res/sprites/sprites_data.def");
-        FirstPlayer = new Character(MainSheet.getSprite("Mario.gif"), 20, 340);
+        mainSheet = new PackedSpriteSheet("./res/sprites/sprites_data.def");
+        firstPlayer = new Character(mainSheet.getSprite("Mario.gif"), 20, 340);
         backgroundImage = new Image("./res/sprites/background.png");
 
         gc.getInput().enableKeyRepeat();
@@ -46,7 +44,7 @@ public class MainGame extends BasicGame
     public void render(GameContainer gc, Graphics g) throws SlickException {
         //Draw Background
         g.drawImage(backgroundImage, 0, 0);
-        g.drawImage(FirstPlayer.getCharacterImage(), FirstPlayer.getCharacterX(), FirstPlayer.getCharacterY());
+        g.drawImage(firstPlayer.getCharacterImage(), firstPlayer.getCharacterX(), firstPlayer.getCharacterY());
 
     }
 
