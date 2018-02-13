@@ -11,6 +11,7 @@ public class MainGame extends BasicGame
 
     Character FirstPlayer;
     Image backgroundImage;
+    PackedSpriteSheet MainSheet;
 
     public MainGame(String gamename)
     {
@@ -19,10 +20,11 @@ public class MainGame extends BasicGame
 
 
     @Override
-    public void init(GameContainer gc) throws SlickException {//Wird einmal zu Beginn ausgeführt.
+    public void init(GameContainer gc) throws SlickException {
         //Inits
-        FirstPlayer = new Character(new Image("./res/sprites/pengo.png"), 20, 340);
-        backgroundImage = new Image("./res/sprites/level.png");
+        MainSheet = new PackedSpriteSheet("./res/sprites/sprites_data.def");
+        FirstPlayer = new Character(MainSheet.getSprite("Mario.gif"), 20, 340);
+        backgroundImage = new Image("./res/sprites/background.png");
 
         gc.getInput().enableKeyRepeat();
     }
@@ -45,7 +47,7 @@ public class MainGame extends BasicGame
     public static void main(String[] args) {
         try {
             AppGameContainer appgc;
-            appgc = new AppGameContainer(new ScalableGame(new MainGame("doknow"), 1280, 720));
+            appgc = new AppGameContainer(new ScalableGame(new MainGame("doknow"), 7680, 4320));
             //Das Spiel ist 640 Pixel auf 480 Pixel gross.
 
 
