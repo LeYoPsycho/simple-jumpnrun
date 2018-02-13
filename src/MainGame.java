@@ -1,5 +1,9 @@
 import org.newdawn.slick.*;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,10 +17,12 @@ public class MainGame extends BasicGame
     Image backgroundImage;
     PackedSpriteSheet MainSheet;
 
+    //Constructor
     public MainGame(String gamename)
     {
         super(gamename);
     }
+
 
 
     @Override
@@ -47,13 +53,10 @@ public class MainGame extends BasicGame
     public static void main(String[] args) {
         try {
             AppGameContainer appgc;
-            appgc = new AppGameContainer(new ScalableGame(new MainGame("doknow"), 7680, 4320));
-            //Das Spiel ist 640 Pixel auf 480 Pixel gross.
+            appgc = new AppGameContainer(new ScalableGame(new MainGame("Super Duper Mario Bros"), 1280, 720));
 
+            appgc.setDisplayMode(appgc.getScreenWidth() / 2, appgc.getScreenHeight() / 2, false);
 
-            //Naechste Zeile einkommentieren:
-            //Führe das Spiel in halber Vollbildschirmgroesse aus. Gut bei hohen Aufloesungen!
-            //appgc.setDisplayMode(appgc.getScreenWidth() / 2, appgc.getScreenHeight() / 2, false);
 
             appgc.start();
         } catch (SlickException ex) {
