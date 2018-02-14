@@ -7,8 +7,8 @@ public class Character {
     //Property
     private Image characterImage;
     private float characterX, characterY, jumpHeight;
-    private int characterSpeed, maxJumpHeight;
-    private boolean isMaxHeightReached;
+    private float characterSpeed, maxJumpHeight;
+    private boolean isMaxHeightReached, isMoving;
 
 
     //Init
@@ -16,6 +16,7 @@ public class Character {
         this.characterImage = characterImage;
         characterX = startPosX;
         characterY = startPosY;
+        characterSpeed = 0.3f;
 
     }
 
@@ -26,6 +27,10 @@ public class Character {
 
     void setCharacterY(float y) {
         characterY = y;
+    }
+
+    void setMovingState(boolean characterIsMoving) {
+        isMoving = characterIsMoving;
     }
 
     //Get Propertys
@@ -39,5 +44,18 @@ public class Character {
 
     float getCharacterY() {
         return characterY;
+    }
+
+    boolean getMovingState() {
+        return isMoving;
+    }
+
+    //Functions
+    void moveRight(int delta){
+        characterX = characterX + characterSpeed*delta ;
+    }
+
+    void draw(){
+        characterImage.draw(characterX,characterY);
     }
 }

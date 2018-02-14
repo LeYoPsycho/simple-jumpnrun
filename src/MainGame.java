@@ -43,12 +43,18 @@ public class MainGame extends BasicGame
     public void update(GameContainer gc, int delta) throws SlickException {
 
         if(gc.getInput().isKeyDown(Input.KEY_D)) {
-            firstPlayer.setCharacterX(firstPlayer.getCharacterX() + 5);
+            firstPlayer.moveRight(delta);
         }
 
         if(gc.getInput().isKeyDown(Input.KEY_A)) {
             firstPlayer.setCharacterX(firstPlayer.getCharacterX() + -5);
         }
+
+        if(gc.getInput().isKeyDown(Input.KEY_SPACE)) {
+            firstPlayer.setCharacterY(firstPlayer.getCharacterY() - 5);
+
+        }
+
 
     }
 
@@ -59,7 +65,7 @@ public class MainGame extends BasicGame
         g.fillRect(0, 0, gc.getScreenWidth(), gc.getScreenHeight());
 
         //Draw Player Sprite
-        g.drawImage(firstPlayer.getCharacterImage(), firstPlayer.getCharacterX(), firstPlayer.getCharacterY());
+        firstPlayer.draw();
 
         //Draw Ground Sprites
         int i=0;
