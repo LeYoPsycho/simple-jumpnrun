@@ -29,10 +29,6 @@ public class Character {
         characterY = y;
     }
 
-    void setMovingState(boolean characterIsMoving) {
-        isMoving = characterIsMoving;
-    }
-
     //Get Propertys
     Image getCharacterImage() {
         return characterImage;

@@ -1,6 +1,7 @@
 import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.tiled.TiledMap;
 
 import javax.swing.*;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ public class MainGame extends BasicGame
     Character firstPlayer;
     PackedSpriteSheet mainSheet;
     Color backgroundColor;
+    TiledMap mainMap;
 
     //Constructor
     public MainGame(String gamename)
@@ -30,6 +32,7 @@ public class MainGame extends BasicGame
     @Override
     public void init(GameContainer gc) throws SlickException {
         //Inits
+        mainMap = new TiledMap("./res/sprites/FirstMap.tmx");
         mainSheet = new PackedSpriteSheet("./res/sprites/sprites_data.def");
         firstPlayer = new Character(mainSheet.getSprite("mario.png"), 0, _height - mainSheet.getSprite("mario.png").getHeight() -16);
         backgroundColor = new Color(92, 148, 252);
@@ -61,18 +64,21 @@ public class MainGame extends BasicGame
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         //Draw Background
-        g.setColor(backgroundColor);
-        g.fillRect(0, 0, gc.getScreenWidth(), gc.getScreenHeight());
+        //g.setColor(backgroundColor);
+        //g.fillRect(0, 0, gc.getScreenWidth(), gc.getScreenHeight());
+
+        //Draw Map
+        mainMap.render(0, 0);
 
         //Draw Player Sprite
-        firstPlayer.draw();
+        //firstPlayer.draw();
 
         //Draw Ground Sprites
-        int i=0;
+        /*int i=0;
         while (i<650) {
             g.drawImage(mainSheet.getSprite("ground_1.png"), i, _height - mainSheet.getSprite("ground_1.png").getHeight());
             i = i+16;
-        }
+        }*/
     }
 
     public static void main(String[] args) {
