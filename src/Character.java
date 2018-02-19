@@ -5,19 +5,24 @@ import org.newdawn.slick.*;
 public class Character {
 
     //Property
-    private Image characterImage;
-    private float characterX, characterY, jumpHeight;
-    private float characterSpeed, maxJumpHeight;
-    private boolean isMaxHeightReached, isMoving;
+    private Image marioNormal, marioMove;
+    private float characterX, characterY;
+    private float characterSpeed;
+    private float characterSpeedY;
+    static float groundZero;
+    private float gravitation, jumpSpeed;
+    private boolean jumpActivated = false, jumpIsActivated = false;
 
 
     //Init
-    Character(Image characterImage, float startPosX, float startPosY) {
-        this.characterImage = characterImage;
-        characterX = startPosX;
-        characterY = startPosY;
+    Character(PackedSpriteSheet characterSheet, GameContainer gc) {
+        characterX = 0;
+        characterY = gc.getHeight() - 64;
+        groundZero = gc.getHeight() - 64;
         characterSpeed = 0.3f;
-
+        gravitation = 0.2f;
+        marioNormal = characterSheet.getSprite("mario.png");
+        marioMove = characterSheet.getSprite("mario_walk.png");
     }
 
     //Set Propertys
@@ -29,11 +34,6 @@ public class Character {
         characterY = y;
     }
 
-    //Get Propertys
-    Image getCharacterImage() {
-        return characterImage;
-    }
-
     float getCharacterX() {
         return characterX;
     }
@@ -42,16 +42,40 @@ public class Character {
         return characterY;
     }
 
-    boolean getMovingState() {
-        return isMoving;
+    //Functions
+    void moveRight(int delta) {
+        characterX = characterX + characterSpeed * delta;
     }
 
-    //Functions
-    void moveRight(int delta){
-        characterX = characterX + characterSpeed*delta ;
+    void moveLeft(int delta){
+        characterX = characterX - characterSpeed * delta;
+    }
+
+    void jump(){
+        if (!jumpIsActivated){
+            jumpActivated = true;
+            jumpSpeed = 0.6f;
+        }
+    }
+
+    void update(int delta, GameContainer gc) {
+        characterY += gravitation*delta;
+        if (jumpActivated){
+            jumpIsActivated = true;
+            characterY -= jumpSpeed * delta;
+            jumpSpeed -= 0.01f;//
+            if (jumpSpeed <= 0){
+                jumpActivated = false;
+            }
+        }
+
+        if (characterY > gc.getHeight() - 64) {
+            characterY = gc.getHeight() - 64;
+            jumpIsActivated = false;
+        }
     }
 
     void draw(){
-        characterImage.draw(characterX,characterY);
+        marioNormal.draw(characterX, characterY);
     }
 }
